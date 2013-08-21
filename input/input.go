@@ -6,9 +6,12 @@ import "bufio"
 import "strings"
 import "strconv"
 
+const IntMax = int(^uint(0) >> 1)
+const IntMin = -IntMax - 1
+
 // Line reading closure, to save on bufio.NewReader overhead.
 // Prompts with a supplied string.
-func getReader() func(string) (string) {
+func GetReader() func(string) (string) {
     in := bufio.NewReader(os.Stdin)
     return func(p string) (string) {
         fmt.Print(p)
@@ -20,13 +23,21 @@ func getReader() func(string) (string) {
 
 // Prompts with p until a valid int is entered
 func ReadInt(p string) int {
-    in := getReader()
+    return ReadRangedInt(p, IntMin, IntMax)
+}
+
+func ReadRangedInt(p string, min, max int) int {
+    in := GetReader()
     for {
         s := in(p)
         i, e := strconv.Atoi(s)
         if e == nil {
-            return i
+            if i >= min && i <= max {
+                return i
+            }
+            fmt.Printf("Enter a number between %d & %d\n", min, max)
+        } else {
+            fmt.Println("Not an integer")
         }
-        fmt.Println("Not an integer")
     }
 }
