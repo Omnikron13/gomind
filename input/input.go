@@ -41,11 +41,6 @@ func Read(p string,
     }
 }
 
-//Function to parse ints, for use with input.Read()
-func IntParser(s string, x interface{}) error {
-    return GetIntParser(IntMin, IntMax)(s, x)
-}
-
 //Returns a Parser for ints within specified range
 func GetIntParser(min, max int) Parser {
     return func(s string, x interface{}) error {
