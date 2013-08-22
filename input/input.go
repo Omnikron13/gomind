@@ -50,6 +50,21 @@ func IntParser(s string, x interface{}) error {
     return nil
 }
 
+//Returns a Parser for ints within specified range
+func GetIntParser(min, max int) Parser {
+    return func(s string, x interface{}) error {
+        i, e := strconv.Atoi(s)
+        if e != nil {
+            return fmt.Errorf("Must be an integer")
+        }
+        if i < min || i > max {
+            return fmt.Errorf("Must be in range %d-%d", min, max)
+        }
+        *x.(*int) = i
+        return nil
+    }
+}
+
 // Prompts with p until a valid int is entered
 func ReadInt(p string) int {
     return ReadRangedInt(p, IntMin, IntMax)
