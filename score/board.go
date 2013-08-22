@@ -4,6 +4,7 @@ import "fmt"
 import "bytes"
 import "os"
 import "bufio"
+import "sort"
 
 type Board []Score
 
@@ -26,7 +27,7 @@ func Load() Board {
             break
         }
     }
-    b.bsort()
+    sort.Sort(b)
     return b
 }
 
@@ -57,4 +58,17 @@ func (b Board) bsort() {
             }
         }
     }
+}
+
+//sort.Sort() compliance..
+func (b Board) Len() int {
+    return len(b)
+}
+func (b Board) Less(x, y int) bool {
+    i, _ := b[x].c.Score(b[x].t)
+    j, _ := b[y].c.Score(b[y].t)
+    return i > j
+}
+func (b Board) Swap(x, y int) {
+    b[x], b[y] = b[y], b[x]
 }
