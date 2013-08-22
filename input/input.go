@@ -37,14 +37,14 @@ func Read(p string,
         if e = f(s, x); e == nil {
             break
         }
-        fmt.Println("Not an integer")
+        fmt.Println(e)
     }
 }
 //Function to parse ints, for use with input.Read()
 func Int(s string, x interface{}) error {
     i, e := strconv.Atoi(s)
     if e != nil {
-        return e
+        return fmt.Errorf("Not an integer")
     }
     *x.(*int) = i
     return nil
