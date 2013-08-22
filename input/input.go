@@ -21,6 +21,9 @@ func GetReader() func(string) (string) {
     }
 }
 
+//Type parser func shorthand...
+type Parser func(string, interface{}) error
+
 //Parses a line from stdin with specified func,
 //retrying indefinitely on failure
 func Read(p string,
