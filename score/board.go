@@ -46,20 +46,6 @@ func (b Board) String() string {
     return buf.String()
 }
 
-//Rough implementation of a bubble sort...
-func (b Board) bsort() {
-    for done := false; !done; done = true {
-        for x := len(b)-1; x > 0; x-- {
-            s1, _ := b[x].c.Score(b[x].t)
-            s2, _ := b[x-1].c.Score(b[x].t)
-            if s1 > s2 {
-                b[x], b[x-1] = b[x-1], b[x]
-                done = false
-            }
-        }
-    }
-}
-
 //sort.Sort() compliance..
 func (b Board) Len() int {
     return len(b)
