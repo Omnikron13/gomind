@@ -42,7 +42,7 @@ func Read(p string,
 }
 
 //Returns a Parser for ints within specified range
-func GetIntParser(min, max int) Parser {
+func IntParser(min, max int) Parser {
     return func(s string, x interface{}) error {
         i, e := strconv.Atoi(s)
         if e != nil {
