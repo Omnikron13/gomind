@@ -43,12 +43,7 @@ func Read(p string,
 
 //Function to parse ints, for use with input.Read()
 func IntParser(s string, x interface{}) error {
-    i, e := strconv.Atoi(s)
-    if e != nil {
-        return fmt.Errorf("Not an integer")
-    }
-    *x.(*int) = i
-    return nil
+    return GetIntParser(IntMin, IntMax)(s, x)
 }
 
 //Returns a Parser for ints within specified range
