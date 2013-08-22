@@ -57,6 +57,6 @@ func IntParser(min, max int) Parser {
 }
 
 func ReadInt(p string, min, max int) (i int) {
-    Read(p, GetIntParser(min, max), &i)
+    Read(p, IntParser(min, max), &i)
     return
 }
