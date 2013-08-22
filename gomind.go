@@ -37,8 +37,8 @@ func main() {
 }
 
 func setup() (c code.Code) {
-    l := input.ReadRangedInt("Code Length [2-8]: ", 2, 8)
-    d := input.ReadRangedInt("Code Depth [2-16]: ", 2, 16)
+    l := input.ReadInt("Code Length [2-8]: ", 2, 8)
+    d := input.ReadInt("Code Depth [2-16]: ", 2, 16)
     c = code.New(l, d)
     return
 }
