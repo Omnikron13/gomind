@@ -62,8 +62,9 @@ func GetIntParser(min, max int) Parser {
 }
 
 // Prompts with p until a valid int is entered
-func ReadInt(p string) int {
-    return ReadRangedInt(p, IntMin, IntMax)
+func ReadInt(p string) (i int) {
+    Read(p, GetIntParser(IntMin, IntMax), &i)
+    return
 }
 
 func ReadRangedInt(p string, min, max int) (i int) {
