@@ -32,7 +32,7 @@ func Read(p string,
     in := bufio.NewReader(os.Stdin)
     for {
         fmt.Print(p)
-        s, e := in.ReadString('\n') //REPLACE _
+        s, e := in.ReadString('\n')
         s = strings.TrimRight(s, "\n\r")
         if e = f(s, x); e == nil {
             break
