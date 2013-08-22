@@ -56,7 +56,7 @@ func IntParser(min, max int) Parser {
     }
 }
 
-func ReadRangedInt(p string, min, max int) (i int) {
+func ReadInt(p string, min, max int) (i int) {
     Read(p, GetIntParser(min, max), &i)
     return
 }
