@@ -27,7 +27,7 @@ type Parser func(string, interface{}) error
 //Parses a line from stdin with specified func,
 //retrying indefinitely on failure
 func Read(p string,
-          f func(string, interface{}) error,
+          f Parser,
           x interface{}) {
     in := bufio.NewReader(os.Stdin)
     for {
