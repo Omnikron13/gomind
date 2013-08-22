@@ -6,18 +6,25 @@ import "os"
 import "bufio"
 import "sort"
 
+//Number of scores displayed
+const numShown  = 10  -1 //-1 for ease of comparison...
+//Amount internal slice is grown by
+const capInc    = 10
+//File scores are written to & read from
+const scoreFile = "scores"
+
 type Board []Score
 
 //Load saved scores from the file 'scores'
 func Load() Board {
-    f, _ := os.Open("scores")
+    f, _ := os.Open(scoreFile)
     buf := bufio.NewReader(f)
-    b := make(Board, 0, 10)
+    b := make(Board, 0, capInc)
     for i := 0; ; i++ {
         if ln, e := buf.ReadString('\n'); e == nil {
             s := unmarshal(ln)
             if len(b) == cap(b) {
-                tmp := make(Board, len(b), cap(b)+10)
+                tmp := make(Board, len(b), cap(b)+capInc)
                 copy(tmp, b)
                 b = tmp
             }
@@ -37,8 +44,8 @@ func (b Board) String() string {
     buf.WriteString("Diff.\tScore\tPlayer\n")
     buf.WriteString("-----\t-----\t------\n")
     for i, s := range b {
-        //Limit scores to Top 10...
-        if i > 9 {
+        //Limit scores to Top <numShown>...
+        if i > numShown {
             break
         }
         buf.WriteString(fmt.Sprintln(s))

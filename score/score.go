@@ -26,7 +26,7 @@ func (s Score) String() (str string) {
 }
 
 func (s Score) Append() {
-    f, e := os.OpenFile("scores", os.O_RDWR|os.O_APPEND, 0660)
+    f, e := os.OpenFile(scoreFile, os.O_RDWR|os.O_APPEND, 0660)
     defer f.Close()
     if e != nil {
         fmt.Println(e)
