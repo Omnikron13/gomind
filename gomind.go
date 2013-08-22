@@ -30,16 +30,6 @@ func main() {
             c := setup()
             fmt.Println(c)
             game(c)
-        /*
-        case "test", "t":
-            //Generate random 'classic' code...
-            c := code.New(4, 6)
-            s := score.New(c, 5, "MrBogey") //...or MrKnuth? ;)
-            s.Append()
-            //Test scoreboard...
-            b := score.Load()
-            fmt.Print(b)
-        */
         default:
             fmt.Println("Command not understood... (Try h[elp])")
         }
