@@ -66,18 +66,7 @@ func ReadInt(p string) int {
     return ReadRangedInt(p, IntMin, IntMax)
 }
 
-func ReadRangedInt(p string, min, max int) int {
-    in := GetReader()
-    for {
-        s := in(p)
-        i, e := strconv.Atoi(s)
-        if e == nil {
-            if i >= min && i <= max {
-                return i
-            }
-            fmt.Printf("Enter a number between %d & %d\n", min, max)
-        } else {
-            fmt.Println("Not an integer")
-        }
-    }
+func ReadRangedInt(p string, min, max int) (i int) {
+    Read(p, GetIntParser(min, max), &i)
+    return
 }
