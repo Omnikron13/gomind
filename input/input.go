@@ -56,6 +56,8 @@ func IntParser(min, max int) Parser {
     }
 }
 
+//Potentially useful timesaver for when a return
+//is preferably to passing by refernce
 func ReadInt(p string, min, max int) (i int) {
     Read(p, IntParser(min, max), &i)
     return
