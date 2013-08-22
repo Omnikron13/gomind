@@ -21,6 +21,32 @@ func GetReader() func(string) (string) {
     }
 }
 
+//Parses a line from stdin with specified func,
+//retrying indefinitely on failure
+func Read(p string,
+          f func(string, interface{}) error,
+          x interface{}) {
+    in := bufio.NewReader(os.Stdin)
+    for {
+        fmt.Print(p)
+        s, e := in.ReadString('\n') //REPLACE _
+        s = strings.TrimRight(s, "\n\r")
+        if e = f(s, x); e == nil {
+            break
+        }
+        fmt.Println("Not an integer")
+    }
+}
+//Function to parse ints, for use with input.Read()
+func Int(s string, x interface{}) error {
+    i, e := strconv.Atoi(s)
+    if e != nil {
+        return e
+    }
+    *x.(*int) = i
+    return nil
+}
+
 // Prompts with p until a valid int is entered
 func ReadInt(p string) int {
     return ReadRangedInt(p, IntMin, IntMax)
