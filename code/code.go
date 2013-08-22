@@ -57,31 +57,30 @@ func (c Code) String() string {
 
 func (c Code) Read(p string) (rtn []int){
     io := input.GetReader()
-    for {
-        if s := io(p); utf8.RuneCountInString(s) == c.l {
-            rn := strings.Split(s, "")
-            rtn = make([]int, c.l)
-            done := true //UGLY - this needs splitting up...
-            for i := range rn {
-                x, e := strconv.ParseInt(rn[i], 16, 0)
-                if e != nil {
-                    fmt.Println("Code consists of (hex) numbers")
-                    done = false //Real ugly..
-                    break
-                }
-                if int(x) >= c.d {
-                    fmt.Printf("Code depth is only %d\n", c.d)
-                    done = false //Real ugly..
-                    break
-                }
-                rtn[i] = int(x)
-            }
-            if done {
-                return
-            }
-        } else {
+    Start: for {
+        s := io(p)
+        //Check for incorrect try length...
+        if utf8.RuneCountInString(s) != c.l {
             fmt.Printf("Code length is %d\n", c.l)
+            continue Start
         }
+        //Prep for parsing...
+        rn := strings.Split(s, "")
+        rtn = make([]int, c.l)
+        //Attempt to parse the code string...
+        for i := range rn {
+            x, e := strconv.ParseInt(rn[i], 16, 0)
+            if e != nil {
+                fmt.Println("Code consists of (hex) numbers")
+                continue Start
+            }
+            if int(x) >= c.d {
+                fmt.Printf("Code depth is only %d\n", c.d)
+                continue Start
+            }
+            rtn[i] = int(x)
+        }
+        return
     }
 }
 
